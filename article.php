@@ -32,8 +32,8 @@ if ($results === false) {
       <ul>
           <li>
             <article>
-              <h2><a href="article.php?id=<?= $article['id']; ?>"><?= $article['title']; ?></a></h2>
-              <p><?= $article['content']; ?></p>
+              <h2><a href="article.php?id=<?= $article['id']; ?>"><?= htmlspecialchars($article['title']); ?></a></h2>
+              <p><?= htmlspecialchars($article['content']); ?></p>
             </article>
           </li>
       </ul>

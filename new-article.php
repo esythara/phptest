@@ -34,7 +34,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($results === false) {
       echo mysqli_error($conn);
     } else {
-      mysqli_stmt_bind_param($stmt, "sss", $_POST['title'], $_POST['content'], $_POST['published_at']);
+
+      if ($published_at == '') {
+        $published_at = null;
+      }
+      mysqli_stmt_bind_param($stmt, "sss", $title, $content, $published_at);
 
       if (mysqli_stmt_execute($stmt)) {
 
@@ -64,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   <div>
     <label for="title">title</label>
-    <input name="title" id="title" placeholder="yr mom" value="<?= $title; ?>">
+    <input name="title" id="title" placeholder="yr mom" value="<?= htmlspecialchars($title); ?>">
   </div>
 
   <div>
