@@ -25,6 +25,9 @@ if ($results === false) {
 }
 ?>
 <?php require 'includes/header.php'; ?>
+
+<a href="new-article.php">new article</a>
+
     <?php if ($article === null): ?>
       <p>ur mom wasn't found :/</p>
     <?php else: ?>
