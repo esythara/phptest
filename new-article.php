@@ -3,7 +3,6 @@
 require 'includes/database.php';
 require 'includes/article.php';
 
-$errors = [];
 $title = '';
 $content = '';
 $published_at = '';
