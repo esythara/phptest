@@ -55,7 +55,7 @@ function validateArticle($title, $content, $published_at)
       $errors[] = "content required";
     }
     if ($published_at != '') {
-      $date_time = date_create_form_format('Y-m-d H:i:s', $published_at);
+      $date_time = date_create_from_format('Y-m-d H:i:s', $published_at);
 
       if ($date_time === false) {
         $errors[] = 'invalid time and date';
