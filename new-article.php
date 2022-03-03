@@ -1,6 +1,7 @@
 <?php
 
 require 'includes/database.php';
+require 'includes/article.php';
 
 $errors = [];
 $title = '';
@@ -12,28 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $content = $_POST['content'];
   $published_at = $_POST['published_at'];
 
-  if ($title == '') {
-    $errors[] = 'title required';
-  }
-  if ($content == '') {
-    $errors[] = "content required";
-  }
-  if ($published_at != '') {
-    $date_time = date_create_form_format('Y-m-d H:i:s', $published_at);
-
-    if ($date_time === false) {
-      $errors[] = 'invalid time and date';
-    } else {
-      $date_errors = date_get_last_errors();
-
-      if ($date_errors['warning_count'] > 0) {
-        $errors[] = 'invalid date and time';
-      }
-    }
-  }
-}
-
-  // $errors = validateArticle($title, $content, $published_at);
+  $errors = validateArticle($title, $content, $published_at);
 
   if(empty($errors)) {
 
