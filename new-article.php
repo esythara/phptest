@@ -29,7 +29,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
       $date_errors = date_get_last_errors();
 
-      var_dump($date_errors); exit;
+      if ($date_errors['warning_count'] > 0) {
+        $errors[] = 'invalid time and date';
+      }
     }
   }
 
