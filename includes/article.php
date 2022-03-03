@@ -68,5 +68,7 @@ function validateArticle($title, $content, $published_at)
       }
     }
   }
-  return $errors;
+  if (isset($errors)) {
+    return $errors; 
+  }
 }
