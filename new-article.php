@@ -7,33 +7,33 @@ $title = '';
 $content = '';
 $published_at = '';
 
-$required = Array("title", "content");
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
   $title = $_POST['title'];
   $content = $_POST['content'];
   $published_at = $_POST['published_at'];
 
-  foreach($required as $requiredfield) {
-    if($_POST[$requiredfield] == '') {
-      $errors[] = $requiredfield . ' required';
+  if ($title == '') {
+    $errors[] = 'title required';
+  }
+  if ($content == '') {
+    $errors[] = "content required";
+  }
+  if ($published_at != '') {
+    $date_time = date_create_form_format('Y-m-d H:i:s', $published_at);
+
+    if ($date_time === false) {
+      $errors[] = 'invalid time and date';
+    } else {
+      $date_errors = date_get_last_errors();
+
+      if ($date_errors['warning_count'] > 0) {
+        $errors[] = 'invalid date and time';
+      }
     }
   }
+}
 
-  // if ($published_at != '') {
-  //   $date_time = date_create_from_format('Y-m-d H:i:s', $published_at);
-  //
-  //   if ($date_time === false) {
-  //     $errors[] = 'invalid time and date';
-  //   } else {
-  //     $date_errors = date_get_last_errors();
-  //
-  //     if ($date_errors['warning_count'] > 0) {
-  //       $errors[] = 'invalid time and date';
-  //     }
-  //   }
-  // }
+  // $errors = validateArticle($title, $content, $published_at);
 
   if(empty($errors)) {
 
