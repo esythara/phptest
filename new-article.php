@@ -27,7 +27,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($date_time === false) {
       $errors[] = 'invalid time and date';
     } else {
-      echo date_format($date_time, 'Y-m-d H:i:s'); exit;
+      $date_errors = date_get_last_errors();
+
+      var_dump($date_errors); exit;
     }
   }
 
