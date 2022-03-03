@@ -21,19 +21,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
 
-  if ($published_at != '') {
-    $date_time = date_create_from_format('Y-m-d H:i:s', $published_at);
-
-    if ($date_time === false) {
-      $errors[] = 'invalid time and date';
-    } else {
-      $date_errors = date_get_last_errors();
-
-      if ($date_errors['warning_count'] > 0) {
-        $errors[] = 'invalid time and date';
-      }
-    }
-  }
+  // if ($published_at != '') {
+  //   $date_time = date_create_from_format('Y-m-d H:i:s', $published_at);
+  //
+  //   if ($date_time === false) {
+  //     $errors[] = 'invalid time and date';
+  //   } else {
+  //     $date_errors = date_get_last_errors();
+  //
+  //     if ($date_errors['warning_count'] > 0) {
+  //       $errors[] = 'invalid time and date';
+  //     }
+  //   }
+  // }
 
   if(empty($errors)) {
 
@@ -57,7 +57,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if (mysqli_stmt_execute($stmt)) {
 
         $id = mysqli_insert_id($conn);
-        echo "inserted ur moms id: $id";
+
+        header("Location: article.php?id=$id");
+        exit;
+        // echo "inserted ur moms id: $id";
 
       } else {
         echo mysqli_stmt_error($stmt);
